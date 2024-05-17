@@ -1,5 +1,5 @@
 public class SLList {
-    public class Node{
+    public static class Node{
         public int item;
         public Node next;
 
@@ -9,38 +9,47 @@ public class SLList {
         }
     }
 
-    public Node head;
+    /** The list always start at sentinel.Next */
+    private Node sentinel;
     private int size;
 
     public SLList(int i){
-        head = new Node(i, null);
+        sentinel = new Node(16, null);
+        sentinel.next = new Node(i, null);
         size = 1;
+    }
+
+    public SLList(){
+        sentinel = new Node(16, null) ;
+        size = 0;
     }
 
     /** Add an element to the beginning*/
     public void insertFirst(int i){
         size ++;
-        head = new Node(i, head);
+        sentinel.next = new Node(i, sentinel.next);
     }
 
     public int getFirst(){
-        return head.item;
+        return sentinel.next.item;
     }
 
 
     public void insertLast(int i){
         size++;
-        while(head.next != null){
-            head = head.next;
+        Node ptr = sentinel;
+        while(ptr.next != null){
+            ptr = ptr.next;
         }
-        head.next = new Node(i, null);
+        ptr.next = new Node(i, null);
     }
 
     public int getLast(){
-        while(head.next != null){
-            head = head.next;
+        Node ptr = sentinel;
+        while(ptr.next != null){
+            ptr = ptr.next;
         }
-        return head.item;
+        return ptr.item;
     }
 
     public int size(){
@@ -57,5 +66,10 @@ public class SLList {
         System.out.println("The last element in this list is: " + myList.getLast());
 
         System.out.println("The size of this list is: " + myList.size());
+
+        SLList emptyList = new SLList();
+        emptyList.insertLast(10);
+        emptyList.insertFirst(20);
+        System.out.println("The size of this list is: " + emptyList.size());
     }
 }
