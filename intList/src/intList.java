@@ -54,6 +54,13 @@ public class intList {
         }
     }
 
+    /** Add an element to the front of the list */
+    public static void insertFirst(intList i, int x){
+
+
+
+
+    }
 
 
     public static void main(String[] args) {
